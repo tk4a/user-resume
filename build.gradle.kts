@@ -1,21 +1,23 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
-    kotlin("jvm") version "1.8.10"
-    java
+    kotlin("jvm") version Version.KOTLIN
 }
 
-group = "ru.rocket-service"
-version = "1.0-SNAPSHOT"
+group = GROUP_NAME
+version = VERSION
 
-repositories {
-    mavenCentral()
+apply("$rootDir/repositories.gradle.kts")
+
+subprojects {
+    val module = getModuleByName(name)
+
+    group = module.group
+    version = module.version
+
+    apply("$rootDir/repositories.gradle.kts")
 }
 
 dependencies {
     implementation(kotlin("stdlib"))
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
-}
-
-tasks.getByName<Test>("test") {
-    useJUnitPlatform()
 }

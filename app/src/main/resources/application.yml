@@ -1,0 +1,20 @@
+server:
+  servlet:
+    context-path: /resume
+  port: 8081
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/rocketservice
+    username: postgres
+    password: rocketpass
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.yaml

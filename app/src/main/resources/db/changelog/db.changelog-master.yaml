@@ -1,0 +1,142 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: artem_tkachev
+      changes:
+        - createTable:
+            tableName: rocket_user
+            columns:
+              - column:
+                  name: user_id
+                  type: VARCHAR(40)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: password
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: last_name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: position
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: email
+                  type: VARCHAR(255)
+                  constraints:
+                    unique: true
+                    nullable: false
+
+        - createTable:
+            tableName: skill
+            columns:
+              - column:
+                  name: skill_id
+                  type: VARCHAR(40)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: VARCHAR(40)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_skill_user
+                    references: rocket_user(user_id)
+                    onDelete: CASCADE
+
+        - createTable:
+            tableName: skill_name
+            columns:
+              - column:
+                  name: skill_name_id
+                  type: VARCHAR(40)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: value
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: skill_id
+                  type: VARCHAR(40)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_skillvalue_skill
+                    references: skill(skill_id)
+                    onDelete: CASCADE
+
+        - createTable:
+            tableName: experience
+            columns:
+              - column:
+                  name: experience_id
+                  type: VARCHAR(40)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: VARCHAR(40)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_experience_user
+                    references: rocket_user(user_id)
+                    onDelete: CASCADE
+
+        - createTable:
+            tableName: link
+            columns:
+              - column:
+                  name: link_id
+                  type: VARCHAR(40)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: VARCHAR(40)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_link_user
+                    references: rocket_user(user_id)
+                    onDelete: CASCADE
