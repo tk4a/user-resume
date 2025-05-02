@@ -9,6 +9,7 @@ databaseChangeLog:
               - column:
                   name: user_id
                   type: VARCHAR(40)
+                  defaultValueComputed: gen_random_uuid()
                   constraints:
                     primaryKey: true
                     nullable: false
@@ -45,6 +46,7 @@ databaseChangeLog:
               - column:
                   name: skill_id
                   type: VARCHAR(40)
+                  defaultValueComputed: gen_random_uuid()
                   constraints:
                     primaryKey: true
                     nullable: false
@@ -68,6 +70,7 @@ databaseChangeLog:
               - column:
                   name: skill_name_id
                   type: VARCHAR(40)
+                  defaultValueComputed: gen_random_uuid()
                   constraints:
                     primaryKey: true
                     nullable: false
@@ -91,6 +94,7 @@ databaseChangeLog:
               - column:
                   name: experience_id
                   type: VARCHAR(40)
+                  defaultValueComputed: gen_random_uuid()
                   constraints:
                     primaryKey: true
                     nullable: false
@@ -119,16 +123,17 @@ databaseChangeLog:
               - column:
                   name: link_id
                   type: VARCHAR(40)
+                  defaultValueComputed: gen_random_uuid()
                   constraints:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: name
+                  name: type
                   type: VARCHAR(255)
                   constraints:
                     nullable: false
               - column:
-                  name: description
+                  name: value
                   type: VARCHAR(255)
                   constraints:
                     nullable: false

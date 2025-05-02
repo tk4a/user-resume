@@ -3,8 +3,12 @@ server:
     context-path: /resume
   port: 8081
 spring:
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/rocketservice
+    username: postgres
+    password: rocketpass
   datasource:
-    url: jdbc:postgresql://localhost:5433/rocketservice
+    url: jdbc:postgresql://localhost:5432/rocketservice
     username: postgres
     password: rocketpass
     driver-class-name: org.postgresql.Driver

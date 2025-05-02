@@ -1,39 +1,30 @@
 package ru.rocket.service.app.entity
 
-import jakarta.persistence.CascadeType
-import jakarta.persistence.Entity
-import jakarta.persistence.FetchType
-import jakarta.persistence.Id
-import jakarta.persistence.OneToMany
-import jakarta.persistence.Table
-import java.util.UUID
 
-@Entity
+import io.r2dbc.spi.Row
+import org.springframework.data.annotation.Id
+import org.springframework.data.relational.core.mapping.Table
+
 @Table(name = "rocket_user")
 data class RocketUser(
     @Id
-    val userId: String = UUID.randomUUID().toString(),
+    var userId: String? = null,
     val email: String,
     val password: String,
     val firstName: String,
     val lastName: String,
-    val position: String,
-    @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL], orphanRemoval = true, fetch = FetchType.LAZY)
-    val links: List<Link> = mutableListOf(),
-    @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL], orphanRemoval = true, fetch = FetchType.LAZY)
-    val skills: List<Skill> = mutableListOf(),
-    @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL], orphanRemoval = true, fetch = FetchType.LAZY)
-    val experience: List<Experience> = mutableListOf()
+    val position: String
 ) {
-    constructor() : this(
-        UUID.randomUUID().toString(),
-        "",
-        "",
-        "",
-        "",
-        "",
-        mutableListOf(),
-        mutableListOf(),
-        mutableListOf(),
-    )
+    companion object {
+        fun fromRow(row: Row): RocketUser {
+            return RocketUser(
+                userId = row.get("user_id", String::class.java) ?: null,
+                email = row.get("email", String::class.java) ?: "",
+                password = row.get("password", String::class.java) ?: "",
+                firstName = row.get("first_name", String::class.java) ?: "",
+                lastName = row.get("last_name", String::class.java) ?: "",
+                position = row.get("position", String::class.java) ?: ""
+            )
+        }
+    }
 }

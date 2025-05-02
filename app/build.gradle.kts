@@ -11,23 +11,22 @@ java { toolchain { languageVersion.set(JavaLanguageVersion.of(17)) } }
 
 tasks {
     withType<KotlinCompile> { kotlinOptions.jvmTarget = "17" }
-
     bootJar { archiveFileName.set("app.jar") }
-
-    jar { enabled = false }
 }
 
 dependencies {
     implementation(project(":api"))
     implementation(kotlin("stdlib"))
     implementation(kotlin("reflect"))
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("io.jsonwebtoken:jjwt-api:0.12.6")
-    implementation("io.jsonwebtoken:jjwt-impl:0.12.6")
-    implementation("io.jsonwebtoken:jjwt-gson:0.12.6")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+
+    implementation("org.springframework.boot:spring-boot-starter-webflux")
+    implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
+
     implementation("io.github.microutils:kotlin-logging-jvm:2.1.21")
-    implementation("org.springframework.boot:spring-boot-starter-logging")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.postgresql:postgresql")
+    implementation("io.r2dbc:r2dbc-postgresql:${Version.R2DBC_POSTGRESQL}")
     implementation("org.liquibase:liquibase-core")
+    implementation("com.zaxxer:HikariCP")
 }

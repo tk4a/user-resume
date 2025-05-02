@@ -1,22 +1,16 @@
 package ru.rocket.service.app.entity
 
-import jakarta.persistence.Entity
-import jakarta.persistence.Id
-import jakarta.persistence.JoinColumn
-import jakarta.persistence.ManyToOne
-import jakarta.persistence.Table
-import java.util.UUID
+import org.springframework.data.annotation.Id
+import org.springframework.data.relational.core.mapping.Table
+import java.util.*
 
-@Entity
 @Table(name = "experience")
 data class Experience(
     @Id
-    val experienceId: String,
+    val experienceId: String? = null,
     val name: String,
     val description: String,
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    val user: RocketUser
+    val userId: String
 ) {
-    constructor() : this(UUID.randomUUID().toString(), "", "", RocketUser())
+    constructor() : this(UUID.randomUUID().toString(), "", "", "")
 }
