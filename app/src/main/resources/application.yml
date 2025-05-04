@@ -1,8 +1,8 @@
 server:
-  servlet:
-    context-path: /resume
   port: 8081
 spring:
+  webflux:
+    base-path: /resume
   r2dbc:
     url: r2dbc:postgresql://localhost:5432/rocketservice
     username: postgres
